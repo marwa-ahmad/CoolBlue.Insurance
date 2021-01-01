@@ -37,6 +37,25 @@ namespace Insurance.Tests
                 actual: result.InsuranceValue
             );
         }
+
+        [Fact]
+        public void CalculateInsurance_GivenSalesPriceLaptop_LessThan500_ShouldSet500EurosIntoInsuranceCost()
+        {
+            const float expectedInsuranceValue = 500;
+
+            var dto = new HomeController.InsuranceDto
+            {
+                ProductId = 2,
+            };
+            var sut = new HomeController();
+
+            var result = sut.CalculateInsurance(dto);
+
+            Assert.Equal(
+                expected: expectedInsuranceValue,
+                actual: result.InsuranceValue
+            );
+        }
     }
 
     public class ControllerTestFixture: IDisposable
@@ -74,9 +93,9 @@ namespace Insurance.Tests
                             var product = new
                                           {
                                               id = productId,
-                                              name = "Test Product",
-                                              productTypeId = 1,
-                                              salesPrice = 750
+                                              name = "Smartphones",
+                                              productTypeId = 3,
+                                              salesPrice = 400
                                           };
                             return context.Response.WriteAsync(JsonConvert.SerializeObject(product));
                         }
@@ -91,6 +110,18 @@ namespace Insurance.Tests
                                                    {
                                                        id = 1,
                                                        name = "Test type",
+                                                       canBeInsured = true
+                                                   },
+                                                    new
+                                                   {
+                                                       id = 2,
+                                                       name = "Laptops",
+                                                       canBeInsured = true
+                                                   },
+                                                    new
+                                                   {
+                                                       id = 3,
+                                                       name = "Smartphones",
                                                        canBeInsured = true
                                                    }
                                                };
