@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Insurance.Common\Insurance.Common.csproj" />
+    <ProjectReference Include="..\..\src\Insurance.Common\Insurance.Common.csproj" />
     <ProjectReference Include="..\..\src\Insurance.Api\Insurance.Api.csproj" />
   </ItemGroup>
 

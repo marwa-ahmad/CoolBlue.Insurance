@@ -11,13 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insurance.Tests", "tests\In
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{688513B6-F847-4834-8770-21037905B973}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insurance.Domain", "Insurance.Domain\Insurance.Domain.csproj", "{18E15D25-27B5-40C8-A6BA-3F76FF91F3CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insurance.Domain", "src\Insurance.Domain\Insurance.Domain.csproj", "{18E15D25-27B5-40C8-A6BA-3F76FF91F3CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insurance.Common", "Insurance.Common\Insurance.Common.csproj", "{2687A717-5E9D-4BD5-9534-61BA6C1E1AEF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insurance.Common", "src\Insurance.Common\Insurance.Common.csproj", "{2687A717-5E9D-4BD5-9534-61BA6C1E1AEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insurance.Service", "Insurance.Service\Insurance.Service.csproj", "{44A048BC-0667-488D-AE23-DAAC4175B1BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insurance.Service", "src\Insurance.Service\Insurance.Service.csproj", "{44A048BC-0667-488D-AE23-DAAC4175B1BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insurance.Operations", "Insurance.Operations\Insurance.Operations.csproj", "{D5CC90D1-A4A9-4205-850C-1F04D51DE73D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insurance.Operations", "src\Insurance.Operations\Insurance.Operations.csproj", "{D5CC90D1-A4A9-4205-850C-1F04D51DE73D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
