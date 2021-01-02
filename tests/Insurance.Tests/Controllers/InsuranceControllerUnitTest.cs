@@ -1,0 +1,45 @@
+using System;
+using System.Threading.Tasks;
+using Insurance.Api.Controllers;
+using Microsoft.Extensions.DependencyInjection;
+using Xunit;
+
+namespace Insurance.Tests
+{
+    public class InsuranceControllerUnitTest: IClassFixture<SetupTestFixture>
+    {
+        private readonly IServiceProvider _serviceProvider;
+        private InsuranceController _insuranceController;
+
+        public InsuranceControllerUnitTest(SetupTestFixture setuptestFixture)
+        {
+            _serviceProvider = setuptestFixture.ServiceProvider;
+
+            _insuranceController = _serviceProvider.GetService<InsuranceController>();
+        }
+
+        [Theory]
+        [MemberData(nameof(InsuranceTestData.InsuranceWith1000), MemberType = typeof(InsuranceTestData))]
+        public async Task GetProductInsurance_SalesPriceIn500And2000_ExpectedInsurance1000Euros(int productId, float expectedInsuranceValue)
+        {
+            var result = await _insuranceController.GetProductInsuranceAsync(productId);
+
+            Assert.Equal(
+                expected: expectedInsuranceValue,
+                actual: result.InsuranceValue
+            );
+        }
+
+        [Theory]
+        [MemberData(nameof(InsuranceTestData.InsuranceWith500), MemberType = typeof(InsuranceTestData))]
+        public async Task GetProductInsurance_SalesPriceLess500_ExpectedInsurance500Euros(int productId, float expectedInsuranceValue)
+        {
+            var result = await _insuranceController.GetProductInsuranceAsync(productId);
+
+            Assert.Equal(
+                expected: expectedInsuranceValue,
+                actual: result.InsuranceValue
+            );
+        }
+    }
+}
