@@ -26,7 +26,8 @@ namespace Insurance.Api
         {
             _exceptionHandlers = new Dictionary<Type, Action<ExceptionContext>>()
             {
-                { typeof(ProductTypeNotFoundException), HandleProductTypeNotFoundException}
+                { typeof(ProductTypeNotFoundException), HandleProductTypeNotFoundException},
+                { typeof(ProductNotFoundException), HandleProductNotFoundException}
             };
         }
 
@@ -49,10 +50,33 @@ namespace Insurance.Api
 
         private void HandleProductTypeNotFoundException(ExceptionContext context)
         {
-            var e = context.Exception as ProductTypeNotFoundException;
-            _logger.LogException(e, e.Message);
+            var exception = context.Exception as ProductTypeNotFoundException;
+            _logger.LogException(exception, exception.Message);
 
-            context.HttpContext.Response.StatusCode = StatusCodes.Status204NoContent;
+            var customResultObject = new ProblemDetails
+            {
+                Status = StatusCodes.Status204NoContent,
+                Title = $"Opps!! The product's type was not found.{Environment.NewLine}{exception.Message}"
+            };
+            context.Result = new ObjectResult(customResultObject);
+
+            context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+            context.ExceptionHandled = true;
+        }
+
+        private void HandleProductNotFoundException(ExceptionContext context)
+        {
+            var exception = context.Exception as ProductTypeNotFoundException;
+            _logger.LogException(exception, exception.Message);
+
+            var customResultObject = new ProblemDetails
+            {
+                Status = StatusCodes.Status204NoContent,
+                Title = $"Opps!! The product was not found.{Environment.NewLine}{exception.Message}"
+            };
+            context.Result = new ObjectResult(customResultObject);
+
+            context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
             context.ExceptionHandled = true;
         }
 

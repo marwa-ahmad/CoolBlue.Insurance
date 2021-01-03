@@ -1,10 +1,9 @@
 ﻿using Insurance.Common;
+using Insurance.Domain;
 using Insurance.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Insurance.Api.Controllers
@@ -30,10 +29,10 @@ namespace Insurance.Api.Controllers
         [SwaggerOperation(Summary = "Product's insurance", Description = "Gets product's insurance cost based on its sales price")]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(OrderInsuranceResponseDto), Description = "Returns the order's total insurance cost")]
         [SwaggerResponse(StatusCodes.Status204NoContent, Description = "This means no product with the given id was found.")]
-        public async Task<IActionResult> GetOrderInsuranceAsync(OrderInsuranceRequestDto orderInsuranceRequestDto)
+        public async Task<IActionResult> GetOrderInsuranceAsync(OrderInsuranceRequestDto request)
         {
-            OrderInsuranceResponseDto productsInsurance = await _insuranceService.GetOrderInsuranceAsync(orderInsuranceRequestDto);
-            if (productsInsurance.IsEmpty())
+            OrderInsuranceResponseDto productsInsurance = await _insuranceService.GetOrderInsuranceAsync(request);
+            if (productsInsurance == null)
             {
                 return NoContent();
             }

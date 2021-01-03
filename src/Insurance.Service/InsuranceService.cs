@@ -1,6 +1,8 @@
 ﻿using Insurance.Common;
 using Insurance.Domain;
 using Insurance.Operations;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Insurance.Service
@@ -21,21 +23,18 @@ namespace Insurance.Service
             _productInsuranceManager = productInsuranceManager;
         }
 
-
         public async Task<InsuranceResponseDto> GetProductInsuranceAsync(int productId)
         {
             var productDetails = await _productService.GetProductAsync(productId);
             if (productDetails == null)
             {
-                _logger.LogInformation($"Could not proceed with Get product's insurance; product[{productId}] was not found.");
-                return null;
+                throw new ProductNotFoundException($"Could not proceed with Get product's insurance; product[{productId}] was not found.");
             }
 
             var productType = await _productTypeService.GetProductTypeAsync(productDetails.ProductTypeId);
             if (productType == null)
             {
-                _logger.LogInformation($"Could not proceed with Get product insurance; productType[{productDetails.ProductTypeId}] was not found.");
-                return null;
+                throw new ProductTypeNotFoundException($"Could not proceed with Get product insurance; productType[{productDetails.ProductTypeId}] was not found.");
             }
 
             var product = new Product()
@@ -53,6 +52,28 @@ namespace Insurance.Service
             {
                 InsuranceValue = insuranceValue,
                 ProductId = productId
+            };
+        }
+
+        public async Task<OrderInsuranceResponseDto> GetOrderInsuranceAsync(OrderInsuranceRequestDto request)
+        {
+            var productsInsuranceTasks = new List<Task<InsuranceResponseDto>>();
+            foreach (var productId in request.ProductsIds)
+            {
+                productsInsuranceTasks.Add(GetProductInsuranceAsync(productId));
+            }
+            var result = await Task.WhenAll(productsInsuranceTasks);
+
+            if (result.IsEmpty())
+            {
+                _logger.LogInformation($"Could not proceed with Get order insurance; products' insurance were null/empty.");
+                return null;
+            }
+
+            var totalInsurance = result.Sum(r => r.InsuranceValue);
+            return new OrderInsuranceResponseDto()
+            {
+                TotalInsuranceValue = totalInsurance
             };
         }
     }
