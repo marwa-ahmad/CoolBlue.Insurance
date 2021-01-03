@@ -1,6 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using Insurance.Api.Controllers;
+using Insurance.Domain;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
@@ -23,10 +25,10 @@ namespace Insurance.Tests
         public async Task GetProductInsurance_SalesPriceIn500And2000_ExpectedInsurance1000Euros(int productId, float expectedInsuranceValue)
         {
             var result = await _insuranceController.GetProductInsuranceAsync(productId);
-
+            Assert.IsType<OkObjectResult>(result);
             Assert.Equal(
                 expected: expectedInsuranceValue,
-                actual: result.InsuranceValue
+                actual: ((InsuranceResponseDto)((OkObjectResult)result).Value).InsuranceValue
             );
         }
 
@@ -35,10 +37,11 @@ namespace Insurance.Tests
         public async Task GetProductInsurance_SalesPriceLess500_ExpectedInsurance500Euros(int productId, float expectedInsuranceValue)
         {
             var result = await _insuranceController.GetProductInsuranceAsync(productId);
+            Assert.IsType<OkObjectResult>(result);
 
             Assert.Equal(
                 expected: expectedInsuranceValue,
-                actual: result.InsuranceValue
+                actual: ((InsuranceResponseDto)((OkObjectResult)result).Value).InsuranceValue
             );
         }
     }

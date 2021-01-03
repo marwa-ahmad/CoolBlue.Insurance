@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Insurance.Tests.Mock
+namespace Insurance.Tests
 {
     public class ProductTypeService : IProductTypeService
     {
@@ -19,9 +19,9 @@ namespace Insurance.Tests.Mock
         {
             _productTypes = new List<ProductTypeResponseDto>()
             {
-                new ProductTypeResponseDto(){ CanBeInsured = true, Id = 1, Name = "Mac"},
-                new ProductTypeResponseDto(){ CanBeInsured = true, Id = 2, Name = "Washing machines"},
-                new ProductTypeResponseDto(){ CanBeInsured = true, Id = 3, Name = "SLR cameras"}
+                new ProductTypeResponseDto(){ CanBeInsured = true, Id = 21, Name = "Laptops"},
+                new ProductTypeResponseDto(){ CanBeInsured = true, Id = 33, Name = "Digital cameras"},
+                new ProductTypeResponseDto(){ CanBeInsured = true, Id = 32, Name = "Smartphones"}
             };
         }
 
