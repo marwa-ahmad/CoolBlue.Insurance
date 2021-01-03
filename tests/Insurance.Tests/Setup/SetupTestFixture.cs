@@ -24,8 +24,8 @@ namespace Insurance.Tests
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddSingleton<Common.ILogger, SerilogLogger>();
 
-            serviceCollection.AddTransient<IProductTypeService, ProductTypeService>();
-            serviceCollection.AddTransient<IProductService, ProductService>();
+            serviceCollection.AddTransient<IProductTypeService, ProductTypeServiceMock>();
+            serviceCollection.AddTransient<IProductService, ProductServiceMock>();
             serviceCollection.AddTransient<IInsuranceService, InsuranceService>();
 
             serviceCollection.AddTransient<IBasicInsuranceOperation, BasicInsuranceOperation>();

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Insurance.Tests
 {
-    public class ProductService : IProductService
+    public class ProductServiceMock : IProductService
     {
         private List<ProductResponseDto> _products;
 
-        public ProductService()
+        public ProductServiceMock()
         {
             InitializeProducts();
         }
@@ -21,7 +21,10 @@ namespace Insurance.Tests
             {
                 new ProductResponseDto(){ ProductTypeId  = 33, SalesPrice = 600, Id = 1},
                 new ProductResponseDto(){ ProductTypeId = 32, SalesPrice = 400, Id = 2},
-                new ProductResponseDto(){ ProductTypeId = 21, SalesPrice = 700, Id = 3}
+                new ProductResponseDto(){ ProductTypeId = 21, SalesPrice = 700, Id = 3},
+                new ProductResponseDto(){ ProductTypeId = 33, SalesPrice = 400, Id = 4},
+                new ProductResponseDto(){ ProductTypeId = 33, SalesPrice = 2000, Id = 5},
+                new ProductResponseDto(){ ProductTypeId = 32, SalesPrice = 2000, Id = 6}
             };
         }
 

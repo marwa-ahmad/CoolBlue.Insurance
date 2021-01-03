@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Insurance.Tests
 {
-    public class ProductTypeService : IProductTypeService
+    public class ProductTypeServiceMock : IProductTypeService
     {
         private List<ProductTypeResponseDto> _productTypes;
         
-        public ProductTypeService()
+        public ProductTypeServiceMock()
         {
             InitializeProductTypes();
         }

@@ -44,5 +44,44 @@ namespace Insurance.Tests
                 actual: ((InsuranceResponseDto)((OkObjectResult)result).Value).InsuranceValue
             );
         }
+
+        [Theory]
+        [MemberData(nameof(InsuranceTestData.InsuranceWith0), MemberType = typeof(InsuranceTestData))]
+        public async Task GetProductInsurance_SalesPriceLess500_ExpectedInsurance0Euros(int productId, float expectedInsuranceValue)
+        {
+            var result = await _insuranceController.GetProductInsuranceAsync(productId);
+            Assert.IsType<OkObjectResult>(result);
+
+            Assert.Equal(
+                expected: expectedInsuranceValue,
+                actual: ((InsuranceResponseDto)((OkObjectResult)result).Value).InsuranceValue
+            );
+        }
+
+        [Theory]
+        [MemberData(nameof(InsuranceTestData.InsuranceWith2000), MemberType = typeof(InsuranceTestData))]
+        public async Task GetProductInsurance_SalesPriceAbove2000_ExpectedInsurance2000Euros(int productId, float expectedInsuranceValue)
+        {
+            var result = await _insuranceController.GetProductInsuranceAsync(productId);
+            Assert.IsType<OkObjectResult>(result);
+
+            Assert.Equal(
+                expected: expectedInsuranceValue,
+                actual: ((InsuranceResponseDto)((OkObjectResult)result).Value).InsuranceValue
+            );
+        }
+
+        [Theory]
+        [MemberData(nameof(InsuranceTestData.InsuranceWith2500), MemberType = typeof(InsuranceTestData))]
+        public async Task GetProductInsurance_SalesPriceAbove2000_ExpectedInsurance2500Euros(int productId, float expectedInsuranceValue)
+        {
+            var result = await _insuranceController.GetProductInsuranceAsync(productId);
+            Assert.IsType<OkObjectResult>(result);
+
+            Assert.Equal(
+                expected: expectedInsuranceValue,
+                actual: ((InsuranceResponseDto)((OkObjectResult)result).Value).InsuranceValue
+            );
+        }
     }
 }
