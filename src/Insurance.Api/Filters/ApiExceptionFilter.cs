@@ -56,7 +56,7 @@ namespace Insurance.Api
             var customResultObject = new ProblemDetails
             {
                 Status = StatusCodes.Status204NoContent,
-                Title = $"Opps!! The product's type was not found.{Environment.NewLine}{exception.Message}"
+                Title = $"Opps!!{exception.Message}"
             };
             context.Result = new ObjectResult(customResultObject);
 
@@ -66,13 +66,13 @@ namespace Insurance.Api
 
         private void HandleProductNotFoundException(ExceptionContext context)
         {
-            var exception = context.Exception as ProductTypeNotFoundException;
+            var exception = context.Exception as ProductNotFoundException;
             _logger.LogException(exception, exception.Message);
 
             var customResultObject = new ProblemDetails
             {
                 Status = StatusCodes.Status204NoContent,
-                Title = $"Opps!! The product was not found.{Environment.NewLine}{exception.Message}"
+                Title = $"Opps!!{exception.Message}"
             };
             context.Result = new ObjectResult(customResultObject);
 

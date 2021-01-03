@@ -36,13 +36,16 @@ namespace Insurance.Api
 
             services.AddSingleton(typeof(Serilog.ILogger), Log.Logger);
 
+            #region Product DI
+            services.AddTransient<IProductTypeService, ProductTypeService>();
+            services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IProductInsuranceService, ProductInsuranceService>();
+
             services.AddTransient<IBasicInsuranceOperation, BasicInsuranceOperation>();
             services.AddTransient<IExtraInsuranceOperation, ExtraInsuranceOperation>();
-            services.AddTransient<IProductInsuranceManager, ProductInsuranceManager>();
 
-            services.AddTransient<IProductService, ProductService>();
-            services.AddTransient<IProductTypeService, ProductTypeService>();
-            services.AddTransient<IProductInsuranceService, ProductInsuranceService>();
+            services.AddTransient<IProductInsuranceManager, ProductInsuranceManager>();
+            #endregion
 
             #region Order DI
             services.AddTransient<IOrder, Order>();
@@ -51,7 +54,7 @@ namespace Insurance.Api
             services.AddTransient<IOrderBasicOperation, OrderBasicOperation>();
             services.AddTransient<ICameraOrderInsuranceOperation, CameraOrderInsuranceOperation>();
 
-            services.AddTransient<IOrderInsuranceManager, IOrderInsuranceManager>();
+            services.AddTransient<IOrderInsuranceManager, OrderInsuranceManager>();
             #endregion
 
             AddSwagger(services);

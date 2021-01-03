@@ -14,8 +14,6 @@ namespace Insurance.Service
         private ILogger _logger;
         private IConfiguration _configuration;
 
-        private readonly string GetSingleProductEndpoint;
-
         public ProductService(IConfiguration configuration, ILogger logger)
         {
             _logger = logger;
@@ -26,15 +24,20 @@ namespace Insurance.Service
                 ProductClient = new HttpClient();
                 ProductClient.BaseAddress = new Uri(configuration["Product:ServiceUrl"]);
             }
-            GetSingleProductEndpoint = _configuration["Product:GetSingleProduct"];
         }
 
         public async Task<ProductResponseDto> GetProductAsync(int productId)
         {
+            var GetSingleProductEndpoint = _configuration["Product:GetSingleProduct"];
             _logger.LogInformation($"Attmpt to get Product[{productId}] details.");
-            
-            var result = await ProductClient.GetAsync(string.Format("{0}{1:G}", GetSingleProductEndpoint, productId));
-            result.EnsureSuccessStatusCode();
+
+            GetSingleProductEndpoint = GetSingleProductEndpoint.Replace("{id}", productId.ToString());
+
+            var result = await ProductClient.GetAsync(GetSingleProductEndpoint);
+            if (result.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                return null;
+            }
 
             var productDetailsResponse =  await result.Content.ReadAsStringAsync();
             var productDetails = JsonConvert.DeserializeObject<ProductResponseDto>(productDetailsResponse);
