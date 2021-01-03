@@ -9,8 +9,8 @@ namespace Insurance.Domain.ValidationExtension
     {
         public override bool IsValid(object value)
         {
-            var enumerable = value as IEnumerable;
-            return enumerable != null && enumerable.GetEnumerator().MoveNext();
+            var list = value as IList;
+            return list != null && list.Count != 0;
         }
     }
 }
