@@ -7,8 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using Swashbuckle.AspNetCore.SwaggerUI;
-using System.Collections.Generic;
 
 namespace Insurance.Api
 {
