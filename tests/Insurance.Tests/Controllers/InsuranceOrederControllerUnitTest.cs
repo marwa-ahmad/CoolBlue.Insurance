@@ -1,19 +1,19 @@
 ﻿using Insurance.Api.Controllers;
 using System;
-using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Insurance.Domain;
 
 namespace Insurance.Tests.Controllers
 {
-    public class InsuranceOrederControllerUnitTest : IClassFixture<SetupTestFixture>
+    public class OrederInsuranceControllerUnitTest : IClassFixture<SetupTestFixture>
     {
         private readonly IServiceProvider _serviceProvider;
         private OrderInsuranceController _orderInsuranceController;
 
-        public InsuranceOrederControllerUnitTest(SetupTestFixture setuptestFixture)
+        public OrederInsuranceControllerUnitTest(SetupTestFixture setuptestFixture)
         {
             _serviceProvider = setuptestFixture.ServiceProvider;
 
@@ -29,9 +29,32 @@ namespace Insurance.Tests.Controllers
             Assert.IsType<OkObjectResult>(result);
             Assert.Equal(
                 expected: expectedOrderInsuranceValue,
-                actual: ((OrderInsuranceResponseDto)((OkObjectResult)result).Value).InsuranceValue
+                actual: ((OrderInsuranceResponseDto)((OkObjectResult)result).Value).TotalInsuranceValue
             );
         }
 
+        [Theory]
+        [MemberData(nameof(OrderInsuranceTestData.ProductsPriceBetween500And2000), MemberType = typeof(OrderInsuranceTestData))]
+        public async Task GetOrderInsurance_ProductsPriceBetween500And2000_ExpectedInsuranceEach1500Euros(OrderInsuranceRequestDto request, float expectedOrderInsuranceValue)
+        {
+            var result = await _orderInsuranceController.GetOrderInsuranceAsync(request);
+            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(
+                expected: expectedOrderInsuranceValue,
+                actual: ((OrderInsuranceResponseDto)((OkObjectResult)result).Value).TotalInsuranceValue
+            );
+        }
+
+        [Theory]
+        [MemberData(nameof(OrderInsuranceTestData.ProductsPriceAbove2000), MemberType = typeof(OrderInsuranceTestData))]
+        public async Task GetOrderInsurance_ProductsPriceAbove2000_ExpectedInsuranceEach2500Euros(OrderInsuranceRequestDto request, float expectedOrderInsuranceValue)
+        {
+            var result = await _orderInsuranceController.GetOrderInsuranceAsync(request);
+            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(
+                expected: expectedOrderInsuranceValue,
+                actual: ((OrderInsuranceResponseDto)((OkObjectResult)result).Value).TotalInsuranceValue
+            );
+        }
     }
 }

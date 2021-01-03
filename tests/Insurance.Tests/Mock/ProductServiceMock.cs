@@ -24,7 +24,19 @@ namespace Insurance.Tests
                 new ProductResponseDto(){ ProductTypeId = 21, SalesPrice = 700, Id = 3},
                 new ProductResponseDto(){ ProductTypeId = 33, SalesPrice = 400, Id = 4},
                 new ProductResponseDto(){ ProductTypeId = 33, SalesPrice = 2000, Id = 5},
-                new ProductResponseDto(){ ProductTypeId = 32, SalesPrice = 2000, Id = 6}
+                new ProductResponseDto(){ ProductTypeId = 32, SalesPrice = 2000, Id = 6},
+
+                new ProductResponseDto(){ ProductTypeId = 32, SalesPrice = 200, Id = 7},
+                new ProductResponseDto(){ ProductTypeId = 21, SalesPrice = 450, Id = 8},
+                new ProductResponseDto(){ ProductTypeId = 32, SalesPrice = 150, Id = 9},
+                new ProductResponseDto(){ ProductTypeId = 21, SalesPrice = 299.8f, Id = 10},
+
+                new ProductResponseDto(){ ProductTypeId = 32, SalesPrice = 500, Id = 11},
+                new ProductResponseDto(){ ProductTypeId = 21, SalesPrice = 1800, Id = 12},
+                new ProductResponseDto(){ ProductTypeId = 21, SalesPrice = 1999.6f, Id = 13},
+
+                new ProductResponseDto(){ ProductTypeId = 32, SalesPrice = 2000, Id = 14},
+                new ProductResponseDto(){ ProductTypeId = 21, SalesPrice = 4000, Id = 15},
             };
         }
 
