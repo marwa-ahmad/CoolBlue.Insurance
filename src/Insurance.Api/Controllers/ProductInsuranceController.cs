@@ -8,12 +8,12 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Insurance.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/insurance")]
     [Produces("application/json")]
-    public class InsuranceController : Controller
+    public class ProductInsuranceController : Controller
     {
         private IInsuranceService _insuranceService; 
-        public InsuranceController(ILogger logger, IInsuranceService insuranceService)
+        public ProductInsuranceController(ILogger logger, IInsuranceService insuranceService)
         {
             _insuranceService = insuranceService;
         }
