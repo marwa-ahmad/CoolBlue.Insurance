@@ -11,13 +11,13 @@ namespace Insurance.Tests
     public class InsuranceControllerUnitTest: IClassFixture<SetupTestFixture>
     {
         private readonly IServiceProvider _serviceProvider;
-        private InsuranceController _insuranceController;
+        private ProductInsuranceController _insuranceController;
 
         public InsuranceControllerUnitTest(SetupTestFixture setuptestFixture)
         {
             _serviceProvider = setuptestFixture.ServiceProvider;
 
-            _insuranceController = _serviceProvider.GetService<InsuranceController>();
+            _insuranceController = _serviceProvider.GetService<ProductInsuranceController>();
         }
 
         [Theory]

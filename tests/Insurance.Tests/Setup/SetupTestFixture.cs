@@ -33,7 +33,8 @@ namespace Insurance.Tests
 
             serviceCollection.AddTransient<IProductInsuranceManager, ProductInsuranceManager>();
 
-            serviceCollection.AddTransient<InsuranceController, InsuranceController>();
+            serviceCollection.AddTransient<ProductInsuranceController, ProductInsuranceController>();
+            serviceCollection.AddTransient<OrderInsuranceController, OrderInsuranceController>();
 
             //logger creation
             var projectDirctoryPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
