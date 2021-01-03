@@ -21,7 +21,9 @@ namespace Insurance.Tests
             {
                 new ProductTypeResponseDto(){ CanBeInsured = true, Id = 21, Name = "Laptops"},
                 new ProductTypeResponseDto(){ CanBeInsured = true, Id = 33, Name = "Digital cameras"},
-                new ProductTypeResponseDto(){ CanBeInsured = true, Id = 32, Name = "Smartphones"}
+                new ProductTypeResponseDto(){ CanBeInsured = true, Id = 32, Name = "Smartphones"},
+                new ProductTypeResponseDto(){ CanBeInsured = false, Id = 841, Name = "Laptops"},
+                new ProductTypeResponseDto(){ CanBeInsured = false, Id = 35, Name = "Laptops"}
             };
         }
 

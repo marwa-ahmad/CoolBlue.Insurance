@@ -56,5 +56,53 @@ namespace Insurance.Tests.Controllers
                 actual: ((OrderInsuranceResponseDto)((OkObjectResult)result).Value).TotalInsuranceValue
             );
         }
+
+        [Theory]
+        [MemberData(nameof(OrderInsuranceTestData.ProductsWithTwoCamerasAndLaptposPriceAbove2000), MemberType = typeof(OrderInsuranceTestData))]
+        public async Task GetOrderInsurance_ProductsCamerasAndLaptops_Above2000_ExpectedInsurance9500(OrderInsuranceRequestDto request, float expectedOrderInsuranceValue)
+        {
+            var result = await _orderInsuranceController.GetOrderInsuranceAsync(request);
+            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(
+                expected: expectedOrderInsuranceValue,
+                actual: ((OrderInsuranceResponseDto)((OkObjectResult)result).Value).TotalInsuranceValue
+            );
+        }
+
+        [Theory]
+        [MemberData(nameof(OrderInsuranceTestData.ProductsLaptposPriceAbove2000), MemberType = typeof(OrderInsuranceTestData))]
+        public async Task GetOrderInsurance_ProductsLaptops_Above2000_ExpectedInsurance10000(OrderInsuranceRequestDto request, float expectedOrderInsuranceValue)
+        {
+            var result = await _orderInsuranceController.GetOrderInsuranceAsync(request);
+            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(
+                expected: expectedOrderInsuranceValue,
+                actual: ((OrderInsuranceResponseDto)((OkObjectResult)result).Value).TotalInsuranceValue
+            );
+        }
+
+        [Theory]
+        [MemberData(nameof(OrderInsuranceTestData.ProductsNoInsurance), MemberType = typeof(OrderInsuranceTestData))]
+        public async Task GetOrderInsurance_ProductsLaptops_Above2000_ExpectedInsurance0(OrderInsuranceRequestDto request, float expectedOrderInsuranceValue)
+        {
+            var result = await _orderInsuranceController.GetOrderInsuranceAsync(request);
+            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(
+                expected: expectedOrderInsuranceValue,
+                actual: ((OrderInsuranceResponseDto)((OkObjectResult)result).Value).TotalInsuranceValue
+            );
+        }
+
+        [Theory]
+        [MemberData(nameof(OrderInsuranceTestData.CamerasProductNoInsurance), MemberType = typeof(OrderInsuranceTestData))]
+        public async Task GetOrderInsurance_ProductsCamera_Above2000_ExpectedInsurance0(OrderInsuranceRequestDto request, float expectedOrderInsuranceValue)
+        {
+            var result = await _orderInsuranceController.GetOrderInsuranceAsync(request);
+            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(
+                expected: expectedOrderInsuranceValue,
+                actual: ((OrderInsuranceResponseDto)((OkObjectResult)result).Value).TotalInsuranceValue
+            );
+        }
     }
 }

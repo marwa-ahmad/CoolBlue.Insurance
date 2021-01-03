@@ -1,5 +1,6 @@
 ﻿using Insurance.Api.Controllers;
 using Insurance.Common;
+using Insurance.Domain;
 using Insurance.Operations;
 using Insurance.Service;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,14 +25,26 @@ namespace Insurance.Tests
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddSingleton<Common.ILogger, SerilogLogger>();
 
+            #region Product DI
             serviceCollection.AddTransient<IProductTypeService, ProductTypeServiceMock>();
             serviceCollection.AddTransient<IProductService, ProductServiceMock>();
-            serviceCollection.AddTransient<IInsuranceService, InsuranceService>();
+            serviceCollection.AddTransient<IProductInsuranceService, ProductInsuranceService>();
 
             serviceCollection.AddTransient<IBasicInsuranceOperation, BasicInsuranceOperation>();
             serviceCollection.AddTransient<IExtraInsuranceOperation, ExtraInsuranceOperation>();
 
             serviceCollection.AddTransient<IProductInsuranceManager, ProductInsuranceManager>();
+            #endregion
+
+            #region Order DI
+            serviceCollection.AddTransient<IOrder, Order>();
+            serviceCollection.AddTransient<IOrderInsuranceService, OrderInsuranceService>();
+
+            serviceCollection.AddTransient<IOrderBasicOperation, OrderBasicOperation>();
+            serviceCollection.AddTransient<ICameraOrderInsuranceOperation, CameraOrderInsuranceOperation>();
+
+            serviceCollection.AddTransient<IOrderInsuranceManager, OrderInsuranceManager>();
+            #endregion
 
             serviceCollection.AddTransient<ProductInsuranceController, ProductInsuranceController>();
             serviceCollection.AddTransient<OrderInsuranceController, OrderInsuranceController>();
