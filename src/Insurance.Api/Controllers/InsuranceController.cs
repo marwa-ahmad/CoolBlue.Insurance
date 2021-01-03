@@ -2,11 +2,16 @@
 using Insurance.Common;
 using Insurance.Domain;
 using Insurance.Service;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Insurance.Api.Controllers
 {
+    [ApiController]
+    [ApiVersion("1.0")]
     [Route("api/[controller]")]
+    [Produces("application/json")]
     public class InsuranceController : Controller
     {
         private IInsuranceService _insuranceService; 
@@ -15,12 +20,25 @@ namespace Insurance.Api.Controllers
             _insuranceService = insuranceService;
         }
 
+
+        /// <summary>
+        /// Get the product's insurance value based on its sales price.
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
         [HttpGet]
-        [Route("product/{id:int}")]
-        public async Task<InsuranceResponseDto> GetProductInsuranceAsync(int productId)
+        [Route("product/{productId}")]
+        [SwaggerOperation(Summary = "Product's insurance", Description = "Gets product's insurance cost based on its sales price")]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(InsuranceResponseDto), Description = "Returns the product's insurance cost")]
+        [SwaggerResponse(StatusCodes.Status204NoContent, Description = "This means no product with the given id was found.")]
+        public async Task<IActionResult> GetProductInsuranceAsync(int productId)
         {
             var productInsurance = await _insuranceService.GetProductInsuranceAsync(productId);
-            return productInsurance;
+            if (productInsurance == null)
+            {
+                return NoContent();
+            }
+            return Ok(productInsurance);
         }
     }
 }

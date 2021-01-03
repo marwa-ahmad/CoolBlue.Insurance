@@ -13,8 +13,8 @@ namespace Insurance.Api
             try
             {
                 //logger creation
-                var projectDirctoryPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-                var insuranceLoggerFilePath = Path.Combine(projectDirctoryPath, "InsuranceLogger.txt");
+                var projectDirctoryPath = Directory.GetParent(Environment.CurrentDirectory).FullName;
+                var insuranceLoggerFilePath = Path.Combine(projectDirctoryPath, "logs", "InsuranceLogger_.log");
                 Log.Logger = new LoggerConfiguration()
                     .WriteTo
                     .File(insuranceLoggerFilePath, rollingInterval: RollingInterval.Day)

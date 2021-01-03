@@ -1,19 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Insurance.Common;
 using Insurance.Operations;
 using Insurance.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Serilog;
+using Swashbuckle.AspNetCore.SwaggerUI;
+using System.Collections.Generic;
 
 namespace Insurance.Api
 {
@@ -34,8 +29,9 @@ namespace Insurance.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-          
-            //services.AddSingleton(typeof(Serilog.ILogger), Log.Logger);
+            services.AddSingleton<Common.ILogger, SerilogLogger>();
+
+            services.AddSingleton(typeof(Serilog.ILogger), Log.Logger);
 
             services.AddTransient<IBasicInsuranceOperation, BasicInsuranceOperation>();
             services.AddTransient<IExtraInsuranceOperation, ExtraInsuranceOperation>();
@@ -44,6 +40,19 @@ namespace Insurance.Api
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IProductTypeService, ProductTypeService>();
             services.AddTransient<IInsuranceService, InsuranceService>();
+            AddSwagger(services);
+        }
+
+        private void AddSwagger(IServiceCollection services)
+        {
+            services.AddApiVersioning();
+            services
+                .AddSwaggerGen(s=> 
+                {
+                    s.EnableAnnotations();
+                    s.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo() { Title = "Insurance APIs", Version = "v1"});
+                })
+                .AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,7 +67,12 @@ namespace Insurance.Api
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
+            app.UseSwagger();
+            app.UseSwaggerUI(s => 
+            {
+                s.SwaggerEndpoint("/swagger/v1/swagger.json", "Insurance API");
+            });
 
             app.UseEndpoints(endpoints =>
             {
