@@ -8,8 +8,6 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Insurance.Api.Controllers
 {
-    [ApiController]
-    [ApiVersion("1.0")]
     [Route("api/[controller]")]
     [Produces("application/json")]
     public class InsuranceController : Controller
