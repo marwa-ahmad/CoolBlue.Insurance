@@ -1,4 +1,5 @@
 using Insurance.Common;
+using Insurance.Domain;
 using Insurance.Operations;
 using Insurance.Service;
 using Microsoft.AspNetCore.Builder;
@@ -41,7 +42,18 @@ namespace Insurance.Api
 
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IProductTypeService, ProductTypeService>();
-            services.AddTransient<IInsuranceService, InsuranceService>();
+            services.AddTransient<IProductInsuranceService, ProductInsuranceService>();
+
+            #region Order DI
+            services.AddTransient<IOrder, Order>();
+            services.AddTransient<IOrderInsuranceService, OrderInsuranceService>();
+
+            services.AddTransient<IOrderBasicOperation, OrderBasicOperation>();
+            services.AddTransient<ICameraOrderInsuranceOperation, CameraOrderInsuranceOperation>();
+
+            services.AddTransient<IOrderInsuranceManager, IOrderInsuranceManager>();
+            #endregion
+
             AddSwagger(services);
         }
 
