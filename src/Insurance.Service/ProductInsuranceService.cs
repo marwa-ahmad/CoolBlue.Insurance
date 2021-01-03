@@ -1,13 +1,11 @@
 ﻿using Insurance.Common;
 using Insurance.Domain;
 using Insurance.Operations;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Insurance.Service
 {
-    public class InsuranceService : IInsuranceService
+    public class ProductInsuranceService : IProductInsuranceService
     {
         private ILogger _logger;
         private IProductTypeService _productTypeService;
@@ -15,7 +13,7 @@ namespace Insurance.Service
         private IProductInsuranceManager _productInsuranceManager;
 
 
-        public InsuranceService(IProductTypeService productTypeService, IProductService productService, IProductInsuranceManager productInsuranceManager, ILogger logger)
+        public ProductInsuranceService(IProductTypeService productTypeService, IProductService productService, IProductInsuranceManager productInsuranceManager, ILogger logger)
         {
             _logger = logger;
             _productTypeService = productTypeService;
@@ -24,6 +22,18 @@ namespace Insurance.Service
         }
 
         public async Task<InsuranceResponseDto> GetProductInsuranceAsync(int productId)
+        {
+            var productInsurance = await GetProductInsuranceDetailsAsync(productId);
+
+            return new InsuranceResponseDto() 
+            {
+                InsuranceValue = productInsurance.InsuranceValue,
+                ProductId = productId
+            };
+        }
+
+
+        public async Task<ProductInsurance> GetProductInsuranceDetailsAsync(int productId)
         {
             var productDetails = await _productService.GetProductAsync(productId);
             if (productDetails == null)
@@ -40,7 +50,6 @@ namespace Insurance.Service
             var product = new Product()
             {
                 Id = productDetails.Id,
-                Name = productDetails.Name,
                 ProductType = (ProductType)productDetails.ProductTypeId,
                 SalesPrice = productDetails.SalesPrice,
                 IsInsured = productType.CanBeInsured,
@@ -48,32 +57,13 @@ namespace Insurance.Service
 
             float insuranceValue = _productInsuranceManager.CalculateInsurance(product);
 
-            return new InsuranceResponseDto() 
+            return new ProductInsurance()
             {
+                Id = product.Id,
+                IsInsured = product.IsInsured,
+                ProductType = product.ProductType,
+                SalesPrice = product.SalesPrice,
                 InsuranceValue = insuranceValue,
-                ProductId = productId
-            };
-        }
-
-        public async Task<OrderInsuranceResponseDto> GetOrderInsuranceAsync(OrderInsuranceRequestDto request)
-        {
-            var productsInsuranceTasks = new List<Task<InsuranceResponseDto>>();
-            foreach (var productId in request.ProductsIds)
-            {
-                productsInsuranceTasks.Add(GetProductInsuranceAsync(productId));
-            }
-            var result = await Task.WhenAll(productsInsuranceTasks);
-
-            if (result.IsEmpty())
-            {
-                _logger.LogInformation($"Could not proceed with Get order insurance; products' insurance were null/empty.");
-                return null;
-            }
-
-            var totalInsurance = result.Sum(r => r.InsuranceValue);
-            return new OrderInsuranceResponseDto()
-            {
-                TotalInsuranceValue = totalInsurance
             };
         }
     }

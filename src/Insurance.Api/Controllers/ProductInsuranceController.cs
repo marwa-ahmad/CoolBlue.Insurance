@@ -12,8 +12,8 @@ namespace Insurance.Api.Controllers
     [Produces("application/json")]
     public class ProductInsuranceController : Controller
     {
-        private IInsuranceService _insuranceService; 
-        public ProductInsuranceController(ILogger logger, IInsuranceService insuranceService)
+        private IProductInsuranceService _insuranceService; 
+        public ProductInsuranceController(ILogger logger, IProductInsuranceService insuranceService)
         {
             _insuranceService = insuranceService;
         }
