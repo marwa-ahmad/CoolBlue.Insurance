@@ -19,9 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insurance.Service", "src\In
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insurance.Operations", "src\Insurance.Operations\Insurance.Operations.csproj", "{D5CC90D1-A4A9-4205-850C-1F04D51DE73D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insurance.Manager", "Insurance.Manager\Insurance.Manager.csproj", "{72CAB28A-D217-428F-BCB9-E2884DF8F2D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insurance.Manager", "src\Insurance.Manager\Insurance.Manager.csproj", "{72CAB28A-D217-428F-BCB9-E2884DF8F2D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insurance.Repository", "Insurance.Repository\Insurance.Repository.csproj", "{3E00E584-0962-4A61-9814-D10262C4875C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insurance.Repository", "src\Insurance.Repository\Insurance.Repository.csproj", "{3E00E584-0962-4A61-9814-D10262C4875C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

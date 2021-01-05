@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Insurance.Common\Insurance.Common.csproj" />
-    <ProjectReference Include="..\src\Insurance.Domain\Insurance.Domain.csproj" />
+    <ProjectReference Include="..\Insurance.Common\Insurance.Common.csproj" />
+    <ProjectReference Include="..\Insurance.Domain\Insurance.Domain.csproj" />
   </ItemGroup>
 
 </Project>
