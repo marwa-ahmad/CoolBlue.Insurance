@@ -31,7 +31,7 @@ namespace Insurance.Manager
         /// </summary>
         /// <param name="product"></param>
         /// <returns></returns>
-        public async Task<float> CalculateInsuranceAsync(IProduct product)
+        public async Task<float> CalculateInsuranceAsync(Product product)
         {
             if (!product.IsInsured)
             {

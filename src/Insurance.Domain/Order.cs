@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Insurance.Domain
 {
-    public class Order : IOrder
+    public class Order
     {
         public List<ProductInsurance> Products { get; set; }
     }

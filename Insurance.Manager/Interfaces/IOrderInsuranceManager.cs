@@ -12,6 +12,6 @@ namespace Insurance.Manager
         /// </summary>
         /// <param name="order"></param>
         /// <returns>order's total insurance cost</returns>
-        float CalculateInsurance(IOrder order);
+        float CalculateInsurance(Order order);
     }
 }

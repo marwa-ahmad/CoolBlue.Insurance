@@ -1,6 +1,6 @@
 ﻿namespace Insurance.Domain
 {
-    public class Product : IProduct
+    public class Product
     {
         public ProductType ProductType { get; set; }
         public int Id { get; set; }

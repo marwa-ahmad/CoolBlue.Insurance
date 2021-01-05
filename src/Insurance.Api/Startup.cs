@@ -50,7 +50,6 @@ namespace Insurance.Api
             #endregion
 
             #region Order DI
-            services.AddTransient<IOrder, Order>();
             services.AddTransient<IOrderInsuranceService, OrderInsuranceService>();
 
             services.AddTransient<IOrderBasicOperation, OrderBasicOperation>();
@@ -60,7 +59,6 @@ namespace Insurance.Api
             #endregion
 
             #region SurchargeRate DI
-            services.AddTransient<IOrder, Order>();
             services.AddTransient<ISurchargeRateService, SurchargeRateService>();
 
             services.AddTransient<ISurchargeRateRepository, SurchargeRateRepository>();

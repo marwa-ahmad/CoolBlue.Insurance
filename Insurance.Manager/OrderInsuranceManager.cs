@@ -27,7 +27,7 @@ namespace Insurance.Manager
         /// </summary>
         /// <param name="order"></param>
         /// <returns>total order's insurance value</returns>
-        public float CalculateInsurance(IOrder order)
+        public float CalculateInsurance(Order order)
         {
             var basicOrderInsuranceValue = _orderBasicOperation.Calculate(order);
 

@@ -39,7 +39,6 @@ namespace Insurance.Tests
             #endregion
 
             #region Order DI
-            serviceCollection.AddTransient<IOrder, Order>();
             serviceCollection.AddTransient<IOrderInsuranceService, OrderInsuranceService>();
 
             serviceCollection.AddTransient<IOrderBasicOperation, OrderBasicOperation>();
@@ -49,7 +48,6 @@ namespace Insurance.Tests
             #endregion
 
             #region SurchargeRate DI
-            serviceCollection.AddTransient<IOrder, Order>();
             serviceCollection.AddTransient<ISurchargeRateService, SurchargeRateService>();
 
             serviceCollection.AddTransient<ISurchargeRateRepository, SurchargeRateRepository>();

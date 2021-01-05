@@ -11,7 +11,7 @@ namespace Insurance.Operations
         /// </summary>
         /// <param name="order"></param>
         /// <returns></returns>
-        public float Calculate(IOrder order)
+        public float Calculate(Order order)
         {
             var containsCamerasMoreThanOne = order.Products.Where(p => p.IsInsured && p.ProductType == ProductType.Camera).Count() > 1;
             if (!containsCamerasMoreThanOne)

@@ -10,7 +10,7 @@ namespace Insurance.Operations
         /// </summary>
         /// <param name="order"></param>
         /// <returns></returns>
-        public float Calculate(IOrder order)
+        public float Calculate(Order order)
         {
             var totalInsuranceValue = order.Products.Sum(p => p.InsuranceValue);
             return totalInsuranceValue;

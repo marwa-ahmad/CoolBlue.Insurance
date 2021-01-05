@@ -7,6 +7,6 @@ namespace Insurance.Operations
     /// </summary>
     public interface ICameraOrderInsuranceOperation
     {
-        float Calculate(IOrder order);
+        float Calculate(Order order);
     }
 }

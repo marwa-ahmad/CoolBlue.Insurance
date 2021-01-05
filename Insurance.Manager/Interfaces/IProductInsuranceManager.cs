@@ -13,6 +13,6 @@ namespace Insurance.Manager
         /// </summary>
         /// <param name="product"></param>
         /// <returns>total product's insurance</returns>
-        Task<float> CalculateInsuranceAsync(IProduct product);
+        Task<float> CalculateInsuranceAsync(Product product);
     }
 }
