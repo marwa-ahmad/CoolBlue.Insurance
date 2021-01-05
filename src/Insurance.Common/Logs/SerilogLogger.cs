@@ -3,6 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace Insurance.Common
 {
+    /// <summary>
+    /// Logger which uses Serilog for logging
+    /// </summary>
     public class SerilogLogger : ILogger
     {
         private Serilog.ILogger logger;

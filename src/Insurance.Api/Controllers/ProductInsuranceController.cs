@@ -29,6 +29,7 @@ namespace Insurance.Api.Controllers
         [SwaggerOperation(Summary = "Product's insurance", Description = "Gets product's insurance cost based on its sales price")]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(InsuranceResponseDto), Description = "Returns the product's insurance cost")]
         [SwaggerResponse(StatusCodes.Status204NoContent, Description = "This means no product with the given id was found.")]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "This means that the request has invalid data.")]
         public async Task<IActionResult> GetProductInsuranceAsync(int productId)
         {
             var productInsurance = await _insuranceService.GetProductInsuranceAsync(productId);

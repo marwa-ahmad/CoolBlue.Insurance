@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace Insurance.Api
 {
     /// <summary>
-    /// Custom exception handling middleware
+    /// Global exception handling middleware
     /// reference: https://weblog.west-wind.com/posts/2016/oct/16/error-handling-and-exceptionfilter-dependency-injection-for-aspnet-core-apis
     /// </summary>
     public class ApiExceptionFilter : ExceptionFilterAttribute
@@ -52,6 +52,10 @@ namespace Insurance.Api
             HandleOtherExceptionTypes(context);
         }
 
+        /// <summary>
+        /// Logs and sends Status400BadRequest with custom message in case of ProductTypeNotFoundException
+        /// </summary>
+        /// <param name="context"></param>
         private void HandleProductTypeNotFoundException(ExceptionContext context)
         {
             var exception = context.Exception as ProductTypeNotFoundException;
@@ -68,6 +72,10 @@ namespace Insurance.Api
             context.ExceptionHandled = true;
         }
 
+        /// <summary>
+        /// Logs and sends Status400BadRequest with custom message in case of ProductNotFoundException
+        /// </summary>
+        /// <param name="context"></param>
         private void HandleProductNotFoundException(ExceptionContext context)
         {
             var exception = context.Exception as ProductNotFoundException;
@@ -84,6 +92,10 @@ namespace Insurance.Api
             context.ExceptionHandled = true;
         }
 
+        /// <summary>
+        /// Logs and sends Status400BadRequest with custom message in case of SurchargeRateProductTypeNotFoundException
+        /// </summary>
+        /// <param name="context"></param>
         private void HandleSurchargeRateProductTypeNotFoundException(ExceptionContext context)
         {
             var exception = context.Exception as SurchargeRateProductTypeNotFoundException;
@@ -100,6 +112,10 @@ namespace Insurance.Api
             context.ExceptionHandled = true;
         }
 
+        /// <summary>
+        /// Logs and sends Status400BadRequest with custom message in case of CreateSurchareRateException
+        /// </summary>
+        /// <param name="context"></param>
         private void HandleCreateSurchareRateException(ExceptionContext context)
         {
             var exception = context.Exception as CreateSurchareRateException;
@@ -116,6 +132,10 @@ namespace Insurance.Api
             context.ExceptionHandled = true;
         }
 
+        /// <summary>
+        /// Logs and sends Status400BadRequest with custom message in case of ProductTypeAlreadyHasSurchargeRateException
+        /// </summary>
+        /// <param name="context"></param>
         private void HandleProductTypeAlreadyHasSurchargeRateException(ExceptionContext context)
         {
             var exception = context.Exception as ProductTypeAlreadyHasSurchargeRateException;
@@ -132,6 +152,10 @@ namespace Insurance.Api
             context.ExceptionHandled = true;
         }
 
+        /// <summary>
+        /// Logs and sends Status500InternalServerError with custom message in case of any unhandled exceptions.
+        /// </summary>
+        /// <param name="context"></param>
         private void HandleOtherExceptionTypes(ExceptionContext context)
         {
             if (context.Exception is AggregateException)

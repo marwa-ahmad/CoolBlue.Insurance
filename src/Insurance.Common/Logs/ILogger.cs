@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 namespace Insurance.Common
 {
     /// <summary>
-    /// The logger which will be injected into the cloud library when needed
+    /// The logger which will be injected into insurance layers' classes
     /// </summary>
     public interface ILogger
     {
