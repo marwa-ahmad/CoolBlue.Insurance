@@ -30,5 +30,41 @@ namespace Insurance.Tests
                 }
             }
         };
+
+        public static IEnumerable<object[]> ValidSurchargeRates_ConcurrentUsers = new List<object[]>
+        {
+            new object[]
+            {
+                new List<SurchargeRateCreateRequestDto>
+                {
+                    new SurchargeRateCreateRequestDto()
+                    {
+                        ProductTypeId = 3,
+                        SurchareRates = new List<float>(){ 20, 10}
+                    },
+                    new SurchargeRateCreateRequestDto()
+                    {
+                        ProductTypeId = 4,
+                        SurchareRates = new List<float>(){ 20, 10}
+                    },
+                    new SurchargeRateCreateRequestDto()
+                    {
+                        ProductTypeId = 5,
+                        SurchareRates = new List<float>(){ 20, 10}
+                    },
+                    new SurchargeRateCreateRequestDto()
+                    {
+                        ProductTypeId = 6,
+                        SurchareRates = new List<float>(){ 20, 10}
+                    },
+                    new SurchargeRateCreateRequestDto()
+                    {
+                        ProductTypeId = 7,
+                        SurchareRates = new List<float>(){ 20, 10}
+                    }
+                }
+            }
+        };
+
     }
 }

@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Insurance.Domain;
 using Insurance.Api.Controllers;
+using System.Collections.Generic;
+using System.Linq;
+using System.Collections;
 
 namespace Insurance.Tests.Controllers
 {
@@ -68,6 +71,31 @@ namespace Insurance.Tests.Controllers
             Assert.Equal(
                 expected: expectedInsuranceValue,
                 actual: ((InsuranceResponseDto)((OkObjectResult)result).Value).InsuranceValue
+            );
+        }
+
+
+        [Theory]
+        [MemberData(nameof(SurchargeRateTestData.ValidSurchargeRates_ConcurrentUsers), MemberType = typeof(SurchargeRateTestData))]
+        public async Task AddProductTypeSurchargeRates_ConcurrentUsers_ExpectedCreated(List<SurchargeRateCreateRequestDto> requests)
+        {
+            var tasks = new List<Task<IActionResult>>();
+            foreach (var request in requests)
+            {
+                tasks.Add(_surchargeRateController.CreateSurchargeRateAsync(request));
+            }
+            var result = await Task.WhenAll(tasks);
+
+            var resultOkObject = new ArrayList(result.Select(r => ((OkObjectResult)r).Value).ToArray());
+            var createSurchargeRateResponse = resultOkObject.Cast<SurchargeRateCreateResponseDto>().ToList();
+            Assert.Equal(
+                expected: requests.Select(r => r.ProductTypeId).ToList(),
+                actual: createSurchargeRateResponse.Select(s => s.ProductTypeId).ToList()
+            );
+
+            Assert.Equal(
+                expected: requests.Select(r => r.SurchareRates).ToList(),
+                actual: createSurchargeRateResponse.Select(s => s.SurchareRates).ToList()
             );
         }
     }
