@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Insurance.Manager
 {
+    /// <summary>
+    /// concrete implementation of IProductInsuranceManager
+    /// </summary>
     public class ProductInsuranceManager : IProductInsuranceManager
     {
         private readonly IBasicInsuranceOperation _basicInsuranceOperation;
@@ -22,6 +25,12 @@ namespace Insurance.Manager
             _surchargeRateRepository = surchargeRateRepository;
         }
 
+        /// <summary>
+        /// Calculates total product's insurance based on its type's if it's insured or not.
+        /// Includes basic insurance operation, special product types' insurance and adding surcharge rates if they exist.
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
         public async Task<float> CalculateInsuranceAsync(IProduct product)
         {
             if (!product.IsInsured)

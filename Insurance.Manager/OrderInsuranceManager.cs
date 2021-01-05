@@ -6,6 +6,9 @@ using System;
 
 namespace Insurance.Manager
 {
+    /// <summary>
+    /// concrete implementation of IOrderInsuranceManager
+    /// </summary>
     public class OrderInsuranceManager: IOrderInsuranceManager
     {
         private readonly IOrderBasicOperation _orderBasicOperation;
@@ -19,6 +22,11 @@ namespace Insurance.Manager
             _logger = logger;
         }
 
+        /// <summary>
+        /// Calculates total order's insurance value based on its product type's insurance and if it contains more than one camera
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns>total order's insurance value</returns>
         public float CalculateInsurance(IOrder order)
         {
             var basicOrderInsuranceValue = _orderBasicOperation.Calculate(order);
