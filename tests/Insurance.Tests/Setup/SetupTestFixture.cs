@@ -1,7 +1,9 @@
 ﻿using Insurance.Api.Controllers;
 using Insurance.Common;
 using Insurance.Domain;
+using Insurance.Manager;
 using Insurance.Operations;
+using Insurance.Repository;
 using Insurance.Service;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
@@ -46,8 +48,16 @@ namespace Insurance.Tests
             serviceCollection.AddTransient<IOrderInsuranceManager, OrderInsuranceManager>();
             #endregion
 
+            #region SurchargeRate DI
+            serviceCollection.AddTransient<IOrder, Order>();
+            serviceCollection.AddTransient<ISurchargeRateService, SurchargeRateService>();
+
+            serviceCollection.AddTransient<ISurchargeRateRepository, SurchargeRateRepository>();
+            #endregion
+
             serviceCollection.AddTransient<ProductInsuranceController, ProductInsuranceController>();
             serviceCollection.AddTransient<OrderInsuranceController, OrderInsuranceController>();
+            serviceCollection.AddTransient<SurchargeRateController, SurchargeRateController>();
 
             //logger creation
             var projectDirctoryPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;

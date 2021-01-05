@@ -1,6 +1,6 @@
 ﻿using Insurance.Domain;
 
-namespace Insurance.Operations
+namespace Insurance.Manager
 {
     public interface IOrderInsuranceManager
     {

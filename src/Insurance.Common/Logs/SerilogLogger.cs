@@ -29,5 +29,15 @@ namespace Insurance.Common
         {
             logger.Information(message);
         }
+
+        public void LogError(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "")
+        {
+            var customMessage =
+                $"CallerMemberName: [{memberName}].{Environment.NewLine}" +
+                $"CallerFilePath: [{sourceFilePath}].{Environment.NewLine}" +
+                $"Error: [{message}]";
+
+            logger.Error(customMessage);
+        }
     }
 }

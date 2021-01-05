@@ -1,6 +1,6 @@
 ﻿using Insurance.Common;
 using Insurance.Domain;
-using Insurance.Operations;
+using Insurance.Manager;
 using System.Threading.Tasks;
 
 namespace Insurance.Service
@@ -55,7 +55,7 @@ namespace Insurance.Service
                 IsInsured = productType.CanBeInsured,
             };
 
-            float insuranceValue = _productInsuranceManager.CalculateInsurance(product);
+            float insuranceValue = await _productInsuranceManager.CalculateInsuranceAsync(product);
 
             return new ProductInsurance()
             {

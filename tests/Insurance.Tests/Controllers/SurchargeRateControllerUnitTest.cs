@@ -3,7 +3,8 @@ using Xunit;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+using Insurance.Domain;
+using Insurance.Api.Controllers;
 
 namespace Insurance.Tests.Controllers
 {
@@ -15,7 +16,7 @@ namespace Insurance.Tests.Controllers
     /// 1.c. create endpoint to assign product type to its surcharge rates; productTypeId, surchargeRatesIds
     /// 
     /// 2. one single step
-    /// 2.a CreateSurchareRateProductType; send productId with list of floats which are surchargeRates
+    /// 2.a CreateSurchareRateProductType; send productId with list of floats which are surchargeRates (as it's required only one endpoint)
     /// Cons of 2nd choice is: 
     ///     could add add multiple surcharge rates with the same value
     ///     not extendable functionality; not easy to maintain
@@ -24,6 +25,7 @@ namespace Insurance.Tests.Controllers
     public class SurchargeRateControllerUnitTest : IClassFixture<SetupTestFixture>
     {
         private readonly IServiceProvider _serviceProvider;
+        private readonly ProductInsuranceController _productInsuranceController;
         private SurchargeRateController _surchargeRateController;
 
         public SurchargeRateControllerUnitTest(SetupTestFixture setuptestFixture)
@@ -31,59 +33,42 @@ namespace Insurance.Tests.Controllers
             _serviceProvider = setuptestFixture.ServiceProvider;
 
             _surchargeRateController = _serviceProvider.GetService<SurchargeRateController>();
+            _productInsuranceController = _serviceProvider.GetService<ProductInsuranceController>(); ;
         }
-
-        //[Theory]
-        //[MemberData(nameof(SurchargeRateTestData.CreateDistinctSurchargeRates), MemberType = typeof(SurchargeRateTestData))]
-        //public async Task CreateSurchargeRates_ExpectedCreated(SurchargeRateCreateRequestDto surchargeRateCreateRequestDto, List<string> expectedSurchargeNames)
-        //{
-        //    //we need async data structure for storing the product type and its surcharge rate
-        //    var result = await _surchargeRateController.CreateSurchargeRates(surchargeRateCreateRequestDto);
-        //    Assert.IsType<CreatedResult>(result);
-
-        //    Assert.Equal(
-        //        expected: expectedSurchargeNames,
-        //        actual: ((SurchargeRateCreateResponseDto)((OkObjectResult)result).Value).SurchargeRates.Select(r => r.Name).ToList()
-        //    );
-        //}
-
-        //[Theory]
-        //[MemberData(nameof(SurchargeRateTestData.CreateDistinctSurchargeRates), MemberType = typeof(SurchargeRateTestData))]
-        //public async Task GetSurchargeRates_ExpectedList(SurchargeRateCreateRequestDto surchargeRateCreateRequestDto, List<string> expectedSurchargeNames)
-        //{
-        //    var result = await _surchargeRateController.CreateSurchargeRates(surchargeRateCreateRequestDto);
-        //    Assert.IsType<CreatedResult>(result);
-
-        //    Assert.Equal(
-        //        expected: expectedSurchargeNames,
-        //        actual: ((SurchargeRateCreateResponseDto)((OkObjectResult)result).Value).SurchargeRates.Select(r => r.Name).ToList()
-        //    );
-
-        //    var result = await _surchargeRateController.GetSurchargeRates();
-        //    Assert.IsType<CreatedResult>(result);
-
-        //    Assert.Equal(
-        //        expected: expectedSurchargeNames,
-        //        actual: ((SurchargeRatesGetResponseDto)((OkObjectResult)result).Value).SurchargeRates.Select(r => r.Name).ToList()
-        //    );
-        //}
 
         [Theory]
         [MemberData(nameof(SurchargeRateTestData.ValidSurchargeRates), MemberType = typeof(SurchargeRateTestData))]
-        public async Task AddProductTypeSurchargeRates_ExpectedCreated(ProductTypeSurchargeRateRequestDto productTypeSurchargeRateRequestDto)
+        public async Task AddProductTypeSurchargeRates_ExpectedCreated(SurchargeRateCreateRequestDto surchargeRateCreateRequestDto)
         {
             //we need async data structure for storing the product type and its surcharge rate
-            var result = await _surchargeRateController.CreateProductTypeSurchareRate(productTypeSurchargeRateRequestDto);
-            Assert.IsType<CreatedResult>(result);
+            var result = await _surchargeRateController.CreateSurchargeRateAsync(surchargeRateCreateRequestDto);
+            Assert.IsType<OkObjectResult>(result);
+
+            Assert.Equal(
+                expected: surchargeRateCreateRequestDto.ProductTypeId,
+                actual: ((SurchargeRateCreateResponseDto)((OkObjectResult)result).Value).ProductTypeId
+            );
+
+            Assert.Equal(
+                expected: surchargeRateCreateRequestDto.SurchareRates,
+                actual: ((SurchargeRateCreateResponseDto)((OkObjectResult)result).Value).SurchareRates
+            );
         }
 
-        //[Theory]
-        //[MemberData(nameof(SurchargeRateTestData.TwoProductTypesWithThreeSurchargeRates), MemberType = typeof(SurchargeRateTestData))]
-        //public async Task AddProductTypeSurchargeRatesSingleStep_ExpectedCreated(ProductTypeSurchargeRateRequestDto productTypeSurchargeRateRequestDto)
-        //{
-        //    //we need async data structure for storing the product type and its surcharge rate
-        //    var result = await _surchargeRateController.AddProductTypeSurchargeRates(productTypeSurchargeRateRequestDto);
-        //    Assert.IsType<CreatedResult>(result);
-        //}
+        [Theory]
+        [MemberData(nameof(SurchargeRateTestData.InsuranceWithSurchargeRate), MemberType = typeof(SurchargeRateTestData))]
+        public async Task GetProductInsurance_SalesPriceAbove2000_WithSurchargeRate_ExpectedInsurance2500Euros(int productId, float expectedInsuranceValue, SurchargeRateCreateRequestDto surchargeRateCreateRequestDto)
+        {
+            var createSurchargeRateResponse = await _surchargeRateController.CreateSurchargeRateAsync(surchargeRateCreateRequestDto);
+            Assert.IsType<OkObjectResult>(createSurchargeRateResponse);
+
+            var result = await _productInsuranceController.GetProductInsuranceAsync(productId);
+            Assert.IsType<OkObjectResult>(result);
+
+            Assert.Equal(
+                expected: expectedInsuranceValue,
+                actual: ((InsuranceResponseDto)((OkObjectResult)result).Value).InsuranceValue
+            );
+        }
     }
 }

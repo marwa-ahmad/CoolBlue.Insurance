@@ -6,5 +6,6 @@ namespace Insurance.Service
     public interface IProductTypeService
     {
         Task<ProductTypeResponseDto> GetProductTypeAsync(int productTypeId);
+        Task<bool> IsProductTypeIdExistsAsync(int productTypeId);
     }
 }

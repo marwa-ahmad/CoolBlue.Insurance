@@ -1,9 +1,10 @@
 ﻿using Insurance.Common;
 using Insurance.Domain;
+using Insurance.Operations;
 using Newtonsoft.Json;
 using System;
 
-namespace Insurance.Operations
+namespace Insurance.Manager
 {
     public class OrderInsuranceManager: IOrderInsuranceManager
     {

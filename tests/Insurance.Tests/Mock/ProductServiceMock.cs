@@ -43,7 +43,10 @@ namespace Insurance.Tests
 
                 new ProductResponseDto(){ ProductTypeId = 841, SalesPrice = 4000, Id = 18},
 
-                new ProductResponseDto(){ ProductTypeId = 841, SalesPrice = 4000, Id = 19}
+                new ProductResponseDto(){ ProductTypeId = 841, SalesPrice = 4000, Id = 19},
+
+                new ProductResponseDto(){ ProductTypeId = 124, SalesPrice = 3000, Id = 20}
+
             };
         }
 

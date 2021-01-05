@@ -50,5 +50,11 @@ namespace Insurance.Service
 
             return productTypeDetails;
         }
+
+        public async Task<bool> IsProductTypeIdExistsAsync(int productTypeId)
+        {
+            var productType = await GetProductTypeAsync(productTypeId);
+            return productType != null;
+        }
     }
 }

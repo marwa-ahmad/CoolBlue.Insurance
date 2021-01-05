@@ -22,5 +22,7 @@ namespace Insurance.Common
             [CallerLineNumber] int sourceLineNumber = 0);
 
         void LogInformation(string message);
+
+        void LogError(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "");
     }
 }

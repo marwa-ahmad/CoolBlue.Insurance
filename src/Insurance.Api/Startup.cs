@@ -1,6 +1,8 @@
 using Insurance.Common;
 using Insurance.Domain;
+using Insurance.Manager;
 using Insurance.Operations;
+using Insurance.Repository;
 using Insurance.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -55,6 +57,13 @@ namespace Insurance.Api
             services.AddTransient<ICameraOrderInsuranceOperation, CameraOrderInsuranceOperation>();
 
             services.AddTransient<IOrderInsuranceManager, OrderInsuranceManager>();
+            #endregion
+
+            #region SurchargeRate DI
+            services.AddTransient<IOrder, Order>();
+            services.AddTransient<ISurchargeRateService, SurchargeRateService>();
+
+            services.AddTransient<ISurchargeRateRepository, SurchargeRateRepository>();
             #endregion
 
             AddSwagger(services);

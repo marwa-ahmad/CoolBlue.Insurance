@@ -27,7 +27,8 @@ namespace Insurance.Api
             _exceptionHandlers = new Dictionary<Type, Action<ExceptionContext>>()
             {
                 { typeof(ProductTypeNotFoundException), HandleProductTypeNotFoundException},
-                { typeof(ProductNotFoundException), HandleProductNotFoundException}
+                { typeof(ProductNotFoundException), HandleProductNotFoundException},
+                { typeof(SurchargeRateProductTypeNotFoundException), HandleSurchargeRateProductTypeNotFoundException}
             };
         }
 
@@ -73,6 +74,22 @@ namespace Insurance.Api
             {
                 Status = StatusCodes.Status204NoContent,
                 Title = $"Opps!!{exception.Message}"
+            };
+            context.Result = new ObjectResult(customResultObject);
+
+            context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+            context.ExceptionHandled = true;
+        }
+
+        private void HandleSurchargeRateProductTypeNotFoundException(ExceptionContext context)
+        {
+            var exception = context.Exception as SurchargeRateProductTypeNotFoundException;
+            _logger.LogException(exception, exception.Message);
+
+            var customResultObject = new ProblemDetails
+            {
+                Status = StatusCodes.Status204NoContent,
+                Title = $"Opps!! {exception.Message}"
             };
             context.Result = new ObjectResult(customResultObject);
 

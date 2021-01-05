@@ -10,6 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Insurance.Manager\Insurance.Manager.csproj" />
+    <ProjectReference Include="..\..\Insurance.Repository\Insurance.Repository.csproj" />
     <ProjectReference Include="..\Insurance.Common\Insurance.Common.csproj" />
     <ProjectReference Include="..\Insurance.Domain\Insurance.Domain.csproj" />
     <ProjectReference Include="..\Insurance.Operations\Insurance.Operations.csproj" />

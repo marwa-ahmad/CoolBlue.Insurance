@@ -1,6 +1,6 @@
 ﻿using Insurance.Common;
 using Insurance.Domain;
-using Insurance.Operations;
+using Insurance.Manager;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
