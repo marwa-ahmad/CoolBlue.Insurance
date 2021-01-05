@@ -4,9 +4,14 @@ namespace Insurance.Operations
 {
     public class ExtraInsuranceOperation : IExtraInsuranceOperation
     {
-        public float Calculate(ProductType productType, float insuranceValue)
+        /// <summary>
+        /// Returns 500Euros in case the product type is laptop or smart phone
+        /// </summary>
+        /// <param name="productType"></param>
+        /// <returns></returns>
+        public float Calculate(ProductType productType)
         {
-            var totalInsurance = insuranceValue;
+            float totalInsurance = 0;
             float extraInsurance = 500;
 
             switch (productType)

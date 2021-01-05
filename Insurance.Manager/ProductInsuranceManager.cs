@@ -42,10 +42,12 @@ namespace Insurance.Manager
             var salesPrice = product.SalesPrice;
             var productType = product.ProductType;
 
-            var insuranceValue = _basicInsuranceOperation.Calculate(salesPrice);
+            var basicInsurance = _basicInsuranceOperation.Calculate(salesPrice);
 
-            var insuranceValueAfterSpecialAssets = _extraInsuranceOperation.Calculate(productType, insuranceValue);
+            var specialAssetsInsurance = _extraInsuranceOperation.Calculate(productType);
             
+            var insuranceValueAfterSpecialAssets = basicInsurance + specialAssetsInsurance;
+
             var surchargeRate = await _surchargeRateRepository.GetSurchargeRateAsync((int)productType);
             var totalSurchargeValue = 0f;
             if (surchargeRate != null)

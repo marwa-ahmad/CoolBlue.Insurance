@@ -9,6 +9,7 @@ namespace Insurance.Repository
     public class SurchargeRateRepository : ISurchargeRateRepository
     {
         /// <summary>
+        /// A concurrent data structure for holding the product type as a key and its corresponding surcharge rates as a value.
         /// reference: https://docs.microsoft.com/en-us/dotnet/standard/collections/thread-safe/how-to-add-and-remove-items
         /// </summary>
         private static ConcurrentDictionary<int, List<SurchargeRate>> _productTypeSurchargeRate;
