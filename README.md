@@ -15,8 +15,9 @@ You have one whole week (including the weekend) to hand your solution back in bu
   - [Different unit tests](https://github.com/marwa-ahmad/CoolBlue.Insurance/tree/master/tests/Insurance.Tests) for [Order Insurance](https://github.com/marwa-ahmad/CoolBlue.Insurance/blob/master/tests/Insurance.Tests/Controllers/OrderInsuranceControllerUnitTest.cs), [Product Insurance](https://github.com/marwa-ahmad/CoolBlue.Insurance/blob/master/tests/Insurance.Tests/Controllers/ProductInsuranceControllerUnitTest.cs) and [Product Type SurchargeRates](https://github.com/marwa-ahmad/CoolBlue.Insurance/blob/master/tests/Insurance.Tests/Controllers/SurchargeRateControllerUnitTest.cs)
   - Having DI in while doing unit testing via [ClassFixture](https://github.com/marwa-ahmad/CoolBlue.Insurance/blob/master/tests/Insurance.Tests/Setup/SetupTestFixture.cs)
   - Injecting TestData via [Theory and MemberData](https://github.com/marwa-ahmad/CoolBlue.Insurance/tree/master/tests/Insurance.Tests/TestData)
-  - [Mocking behaviours of external endpoints while doing the unit tests](https://github.com/marwa-ahmad/CoolBlue.Insurance/tree/master/tests/Insurance.Tests/Mock); which the DI and interface segregation helped here, 
-- Appropriate separation of concerns 
+  - [Mocking behaviours of external endpoints while doing the unit tests](https://github.com/marwa-ahmad/CoolBlue.Insurance/tree/master/tests/Insurance.Tests/Mock); which the DI and interface segregation helped here.
+  
+- Appropriate separation of concerns
   - [Separation of Concerns by having layers as shown in code and in diagrams down below](https://github.com/marwa-ahmad/CoolBlue.Insurance/tree/master/src)
 
 - A solution with an architecture that you can defend and would feel comfortable putting in production.
@@ -26,8 +27,8 @@ You have one whole week (including the weekend) to hand your solution back in bu
   -  Please find diagrams down below
   
 - Appropriate exception handling and fault tolerance
-  -[Global Exception Handling via ExceptionFilter](https://github.com/marwa-ahmad/CoolBlue.Insurance/blob/master/src/Insurance.Api/Filters/ApiExceptionFilter.cs)
-  -[Logger component using serilog](https://github.com/marwa-ahmad/CoolBlue.Insurance/tree/master/src/Insurance.Common/Logs)
+  - [Global Exception Handling via ExceptionFilter handles both custom thrown exceptions and general exceptions](https://github.com/marwa-ahmad/CoolBlue.Insurance/blob/master/src/Insurance.Api/Filters/ApiExceptionFilter.cs)
+  - [Logger component using serilog](https://github.com/marwa-ahmad/CoolBlue.Insurance/tree/master/src/Insurance.Common/Logs)
 
 - Should be runnable on our machines so keep that in mind while picking third party tools and apps etc.
   - [Usage section on running the Unit and Project](https://github.com/marwa-ahmad/CoolBlue.Insurance#usage)
@@ -36,7 +37,7 @@ You have one whole week (including the weekend) to hand your solution back in bu
    - **Assumption/Decision Made**
    - **Reason**
 
-For separation of concerns and applying SOLID, a Domain layer is created which contains the Models and DTO (Data Transfer Objects).
+  - For separation of concerns and applying SOLID, a Domain layer is created which contains the Models and DTO (Data Transfer Objects).
 Plus The below components show in the diagram.
   ![alt General Layout](https://i.ibb.co/PMK9QK1/General-Layout.png)
    
@@ -95,11 +96,17 @@ We want to change the logic around the insurance calculation. We received a repo
 
 * While developing this feature, please document your assumptions and feel free to reach the stakeholders for doubts via email.
 
+![alt OrderAPI](https://i.ibb.co/TYxLxvD/OrderAPI.png)
+
 ## Task 5 [FEATURE 3]:
 As a part of this story we need to provide the administrators/back office staff with a new endpoint that will allow them to upload surcharge rates per product type. This surcharge will then  need to be added to the overall insurance value for the product type.
 
-[Please be aware that this endpoint is going to be used simultaneously by multiple users](https://github.com/marwa-ahmad/CoolBlue.Insurance/blob/master/src/Insurance.Api/Controllers/SurchargeRateController.cs)
+Please be aware that this endpoint is going to be used simultaneously by multiple users
 * While developing this feature, please document your assumptions and feel free to reach out to the stakeholders for doubts via email.
+
+  - All APIs are asynchrouns and a [concurrent data structure was used for storing the product types and their surcharge rates](https://github.com/marwa-ahmad/CoolBlue.Insurance/blob/master/src/Insurance.Repository/SurchargeRateRepository.cs)
+  - [Surchare Rate API in code](https://github.com/marwa-ahmad/CoolBlue.Insurance/blob/master/src/Insurance.Api/Controllers/SurchargeRateController.cs)
+  
 
 # Solution
 ## Usage
