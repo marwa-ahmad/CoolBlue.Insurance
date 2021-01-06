@@ -20,8 +20,7 @@ You have one whole week (including the weekend) to hand your solution back in bu
 - Documentation of your design decisions and technical choices for the tasks. A simple markdown or text file (included in your submission) showing the following will be enough: 
    - **Assumption/Decision Made**
    - **Reason**
-   ![alt General Layout](https://i.ibb.co/PMK9QK1/General-Layout.png)
-   
+  ![alt General Layout](https://i.ibb.co/PMK9QK1/General-Layout.png)
    
 # Your colleagues
 We are, of course, not going to let you deal with the assignment on your own. You will have two software developers available via email if you have any questions and their contact details are below. We will respond within 4 working hours, at the most. Please make sure you send us your questions before/after the weekend, as we don’t work on the weekends.
@@ -58,13 +57,18 @@ The financial manager reported that when customers buy a laptop that costs less 
 It looks like the already implemented functionality has some quality issues. Refactor that code, but be sure to maintain the same behavior. 
 
 * Please make sure to include in the documentation about the approach that you chose for the refactoring.
+
 ![alt ServiceLayer](https://i.ibb.co/Dptst3f/Service-Layer.png)
 
+![alt ManagerLayer](https://i.ibb.co/1mjMGzw/Manager-Layer.png)
+
+1[al OpearationLayer](https://i.ibb.co/MB7PJzG/Operation-Layer.png)
 
 ## Task 3 [FEATURE 1]:
 Now we want to calculate the insurance cost for an order and for this, we are going to provide all the products that are in a shopping cart.
 
 * While developing this feature, please document your assumptions and feel free to reach the stakeholders for doubts via email.
+
 
 ## Task 4 [FEATURE 2]:
 We want to change the logic around the insurance calculation. We received a report from our business analysts that digital cameras are getting lost more than usual. Therefore, if an order has one or more digital cameras, add € 500 to the insured value of the order.
