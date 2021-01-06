@@ -20,6 +20,8 @@ You have one whole week (including the weekend) to hand your solution back in bu
 - Documentation of your design decisions and technical choices for the tasks. A simple markdown or text file (included in your submission) showing the following will be enough: 
    - **Assumption/Decision Made**
    - **Reason**
+   ![alt General Layout](https://i.ibb.co/PMK9QK1/General-Layout.png)
+   
    
 # Your colleagues
 We are, of course, not going to let you deal with the assignment on your own. You will have two software developers available via email if you have any questions and their contact details are below. We will respond within 4 working hours, at the most. Please make sure you send us your questions before/after the weekend, as we don’t work on the weekends.
@@ -48,7 +50,8 @@ There is an existing endpoint that, given the information about the product, cal
 
 ## Task 1 [BUGFIX]:
 The financial manager reported that when customers buy a laptop that costs less than € 500, insurance is not calculated, while it should be € 500.
-
+[Bug fix in code](https://github.com/marwa-ahmad/CoolBlue.Insurance/blob/master/src/Insurance.Operations/Product/ExtraInsuranceOperation.cs)
+[Test case]()
 ## Task 2 [REFACTORING]:
 It looks like the already implemented functionality has some quality issues. Refactor that code, but be sure to maintain the same behavior. 
 
