@@ -62,13 +62,15 @@ It looks like the already implemented functionality has some quality issues. Ref
 
 ![alt ManagerLayer](https://i.ibb.co/1mjMGzw/Manager-Layer.png)
 
-1[al OpearationLayer](https://i.ibb.co/MB7PJzG/Operation-Layer.png)
+![al OpearationLayer](https://i.ibb.co/MB7PJzG/Operation-Layer.png)
+
 
 ## Task 3 [FEATURE 1]:
 Now we want to calculate the insurance cost for an order and for this, we are going to provide all the products that are in a shopping cart.
 
 * While developing this feature, please document your assumptions and feel free to reach the stakeholders for doubts via email.
 
+[Diagrams are shown above here](https://github.com/marwa-ahmad/CoolBlue.Insurance#task-2-refactoring)
 
 ## Task 4 [FEATURE 2]:
 We want to change the logic around the insurance calculation. We received a report from our business analysts that digital cameras are getting lost more than usual. Therefore, if an order has one or more digital cameras, add € 500 to the insured value of the order.
@@ -78,13 +80,29 @@ We want to change the logic around the insurance calculation. We received a repo
 ## Task 5 [FEATURE 3]:
 As a part of this story we need to provide the administrators/back office staff with a new endpoint that will allow them to upload surcharge rates per product type. This surcharge will then  need to be added to the overall insurance value for the product type.
 
-Please be aware that this endpoint is going to be used simultaneously by multiple users.
-
+[Please be aware that this endpoint is going to be used simultaneously by multiple users](https://github.com/marwa-ahmad/CoolBlue.Insurance/blob/master/src/Insurance.Api/Controllers/SurchargeRateController.cs)
 * While developing this feature, please document your assumptions and feel free to reach out to the stakeholders for doubts via email.
 
 # Solution
 ## Usage
 
 1. Clone the solution locally.
-2. Run the unit test project; it will create multiple infrastructures folders at C:\IGS; which is the default Cloud Provider.
+2. Run the all unit tests inside the Insurance.Tests project; it should run successfully.
+3. Run the Insurance.API project; you will see a Swagger UI which lists 3 endpoints
+![alt Swagger](https://i.ibb.co/wdx3mQS/Swagger-Integration.png)
+
+4. Make API call through Postman for Product Insurance API similar to:
+![alt ProductInsuranceAPI](https://i.ibb.co/8zwBvZy/Product-API.png)
+
+5. Make API call through Postman for Order Insurance API similar to:
+![alt OrderAPI](https://i.ibb.co/TYxLxvD/OrderAPI.png)
+
+6. Make API call through Postman for Assigning Surcharge rates to a product type, API similar to:
+Assumptions:
+- Surcharge rate is a percentage from the sales price of the product and it's added on the total insurance value
+- If a product is not insured then no surcharge rate will be applied; since the surcharge rate should be added to the insurance value
+
+![alt SurchargeRateAPI](https://i.ibb.co/Yprjr6C/Surcharge-Rate.png)
+
+7. Make API call to Order insurance or Product isnurance to see the the applied surchage rate to your product type
 
