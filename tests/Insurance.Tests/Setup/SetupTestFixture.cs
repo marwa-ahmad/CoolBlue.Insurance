@@ -49,6 +49,7 @@ namespace Insurance.Tests
 
             #region SurchargeRate DI
             serviceCollection.AddTransient<ISurchargeRateService, SurchargeRateService>();
+            serviceCollection.AddTransient<ISurchargeRateManager, SurchargeRateManager>();
 
             serviceCollection.AddTransient<ISurchargeRateRepository, SurchargeRateRepository>();
             #endregion

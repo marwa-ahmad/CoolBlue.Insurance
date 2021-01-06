@@ -1,5 +1,6 @@
 ﻿using Insurance.Common;
 using Insurance.Domain;
+using Insurance.Manager;
 using Insurance.Repository;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,13 +11,13 @@ namespace Insurance.Service
     {
         private ILogger _logger;
         private IProductTypeService _productTypeService;
-        private ISurchargeRateRepository _surchargeRateRepository;
+        private ISurchargeRateManager _surchargeRateManager;
 
-        public SurchargeRateService(ILogger logger, IProductTypeService productTypeService, ISurchargeRateRepository surchargeRateRepository)
+        public SurchargeRateService(ILogger logger, IProductTypeService productTypeService, ISurchargeRateManager surchargeRateManager)
         {
             _logger = logger;
             _productTypeService = productTypeService;
-            _surchargeRateRepository = surchargeRateRepository;
+            _surchargeRateManager = surchargeRateManager;
         }
 
         public async Task<SurchargeRateCreateResponseDto> CreateSurchargeRateAsync(SurchargeRateCreateRequestDto request)
@@ -35,7 +36,7 @@ namespace Insurance.Service
                 SurchargeRates = request.SurchareRates.Select(r => new SurchargeRate() { Rate = r }).ToList()
             };
 
-            var surchargeRate = await _surchargeRateRepository.AddSurchargeRateAsync(productTypeSurchargeRate);
+            var surchargeRate = await _surchargeRateManager.CreateSurchargeRateAsync(productTypeSurchargeRate);
 
             return new SurchargeRateCreateResponseDto() 
             {

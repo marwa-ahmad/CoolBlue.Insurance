@@ -60,6 +60,7 @@ namespace Insurance.Api
 
             #region SurchargeRate DI
             services.AddTransient<ISurchargeRateService, SurchargeRateService>();
+            services.AddTransient<ISurchargeRateManager, SurchargeRateManager>();
 
             services.AddTransient<ISurchargeRateRepository, SurchargeRateRepository>();
             #endregion
