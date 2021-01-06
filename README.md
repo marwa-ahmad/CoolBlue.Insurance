@@ -71,3 +71,9 @@ Please be aware that this endpoint is going to be used simultaneously by multipl
 
 * While developing this feature, please document your assumptions and feel free to reach out to the stakeholders for doubts via email.
 
+# Solution
+## Usage
+
+1. Clone the solution locally.
+2. Run the unit test project; it will create multiple infrastructures folders at C:\IGS; which is the default Cloud Provider.
+
