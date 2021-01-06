@@ -11,12 +11,27 @@ You have one whole week (including the weekend) to hand your solution back in bu
 5. We ensure our applications and systems are self-healing and resilient in face of failures
 
 # What we expect in your solution:
-- [Behavioural tests](https://github.com/marwa-ahmad/CoolBlue.Insurance/tree/master/tests/Insurance.Tests)
-- [Appropriate separation of concerns](https://github.com/marwa-ahmad/CoolBlue.Insurance/tree/master/src)
+- Behavioural tests
+  - [Different unit tests](https://github.com/marwa-ahmad/CoolBlue.Insurance/tree/master/tests/Insurance.Tests) for [Order Insurance](https://github.com/marwa-ahmad/CoolBlue.Insurance/blob/master/tests/Insurance.Tests/Controllers/OrderInsuranceControllerUnitTest.cs), [Product Insurance](https://github.com/marwa-ahmad/CoolBlue.Insurance/blob/master/tests/Insurance.Tests/Controllers/ProductInsuranceControllerUnitTest.cs) and [Product Type SurchargeRates](https://github.com/marwa-ahmad/CoolBlue.Insurance/blob/master/tests/Insurance.Tests/Controllers/SurchargeRateControllerUnitTest.cs)
+  - Having DI in while doing unit testing via [ClassFixture](https://github.com/marwa-ahmad/CoolBlue.Insurance/blob/master/tests/Insurance.Tests/Setup/SetupTestFixture.cs)
+  - Injecting TestData via [Theory and MemberData](https://github.com/marwa-ahmad/CoolBlue.Insurance/tree/master/tests/Insurance.Tests/TestData)
+  - [Mocking behaviours of external endpoints while doing the unit tests](https://github.com/marwa-ahmad/CoolBlue.Insurance/tree/master/tests/Insurance.Tests/Mock); which the DI and interface segregation helped here, 
+- Appropriate separation of concerns 
+  - [Separation of Concerns by having layers as shown in code and in diagrams down below](https://github.com/marwa-ahmad/CoolBlue.Insurance/tree/master/src)
+
 - A solution with an architecture that you can defend and would feel comfortable putting in production.
+  -  Please find diagrams down below
+  
 - Readable code with meaningful names for variables/classes/interfaces etc.
-- [Appropriate exception handling and fault tolerance](https://github.com/marwa-ahmad/CoolBlue.Insurance/blob/master/src/Insurance.Api/Filters/ApiExceptionFilter.cs)
-- [Should be runnable on our machines](https://github.com/marwa-ahmad/CoolBlue.Insurance#usage) so keep that in mind while picking third party tools and apps etc.
+  -  Please find diagrams down below
+  
+- Appropriate exception handling and fault tolerance
+  -[Global Exception Handling via ExceptionFilter](https://github.com/marwa-ahmad/CoolBlue.Insurance/blob/master/src/Insurance.Api/Filters/ApiExceptionFilter.cs)
+  -[Logger component using serilog](https://github.com/marwa-ahmad/CoolBlue.Insurance/tree/master/src/Insurance.Common/Logs)
+
+- Should be runnable on our machines so keep that in mind while picking third party tools and apps etc.
+  - [Usage section on running the Unit and Project](https://github.com/marwa-ahmad/CoolBlue.Insurance#usage)
+  
 - Documentation of your design decisions and technical choices for the tasks. A simple markdown or text file (included in your submission) showing the following will be enough: 
    - **Assumption/Decision Made**
    - **Reason**
@@ -107,6 +122,7 @@ P.S: You will see that a logs folder is created inside the test project
 ![alt OrderAPI](https://i.ibb.co/TYxLxvD/OrderAPI.png)
 
 7. Make API call through Postman for Assigning Surcharge rates to a product type, API similar to:
+
 Assumptions:
 - Surcharge rate is a percentage from the sales price of the product and it's added on the total insurance value
 - If a product is not insured then no surcharge rate will be applied; since the surcharge rate should be added to the insurance value
@@ -114,5 +130,3 @@ Assumptions:
 ![alt SurchargeRateAPI](https://i.ibb.co/Yprjr6C/Surcharge-Rate.png)
 
 8. Make API call to Order insurance or Product isnurance to see the the applied surchage rate to your product type
-
-9. 
