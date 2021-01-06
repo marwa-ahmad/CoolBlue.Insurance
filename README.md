@@ -51,11 +51,15 @@ There is an existing endpoint that, given the information about the product, cal
 ## Task 1 [BUGFIX]:
 The financial manager reported that when customers buy a laptop that costs less than € 500, insurance is not calculated, while it should be € 500.
 [Bug fix in code](https://github.com/marwa-ahmad/CoolBlue.Insurance/blob/master/src/Insurance.Operations/Product/ExtraInsuranceOperation.cs)
-[Test case]()
+[Test case](https://github.com/marwa-ahmad/CoolBlue.Insurance/blob/30bcd5455e4089a8d737b3f55d3265a3e558b2c8/tests/Insurance.Tests/Controllers/ProductInsuranceControllerUnitTest.cs#L37)
+
+
 ## Task 2 [REFACTORING]:
 It looks like the already implemented functionality has some quality issues. Refactor that code, but be sure to maintain the same behavior. 
 
 * Please make sure to include in the documentation about the approach that you chose for the refactoring.
+![alt ServiceLayer](https://i.ibb.co/Dptst3f/Service-Layer.png)
+
 
 ## Task 3 [FEATURE 1]:
 Now we want to calculate the insurance cost for an order and for this, we are going to provide all the products that are in a shopping cart.
