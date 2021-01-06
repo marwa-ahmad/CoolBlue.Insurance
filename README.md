@@ -11,12 +11,12 @@ You have one whole week (including the weekend) to hand your solution back in bu
 5. We ensure our applications and systems are self-healing and resilient in face of failures
 
 # What we expect in your solution:
-- Behavioural tests
-- Appropriate separation of concerns
+- [Behavioural tests](https://github.com/marwa-ahmad/CoolBlue.Insurance/tree/master/tests/Insurance.Tests)
+- [Appropriate separation of concerns](https://github.com/marwa-ahmad/CoolBlue.Insurance/tree/master/src)
 - A solution with an architecture that you can defend and would feel comfortable putting in production.
 - Readable code with meaningful names for variables/classes/interfaces etc.
-- Appropriate exception handling and fault tolerance
-- Should be runnable on our machines so keep that in mind while picking third party tools and apps etc.
+- [Appropriate exception handling and fault tolerance](https://github.com/marwa-ahmad/CoolBlue.Insurance/blob/master/src/Insurance.Api/Filters/ApiExceptionFilter.cs)
+- [Should be runnable on our machines](https://github.com/marwa-ahmad/CoolBlue.Insurance#usage) so keep that in mind while picking third party tools and apps etc.
 - Documentation of your design decisions and technical choices for the tasks. A simple markdown or text file (included in your submission) showing the following will be enough: 
    - **Assumption/Decision Made**
    - **Reason**
