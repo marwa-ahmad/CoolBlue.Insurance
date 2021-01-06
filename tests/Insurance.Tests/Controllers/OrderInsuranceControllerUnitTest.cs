@@ -8,12 +8,12 @@ using Insurance.Domain;
 
 namespace Insurance.Tests.Controllers
 {
-    public class OrederInsuranceControllerUnitTest : IClassFixture<SetupTestFixture>
+    public class OrderInsuranceControllerUnitTest : IClassFixture<SetupTestFixture>
     {
         private readonly IServiceProvider _serviceProvider;
         private OrderInsuranceController _orderInsuranceController;
 
-        public OrederInsuranceControllerUnitTest(SetupTestFixture setuptestFixture)
+        public OrderInsuranceControllerUnitTest(SetupTestFixture setuptestFixture)
         {
             _serviceProvider = setuptestFixture.ServiceProvider;
 
