@@ -20,6 +20,9 @@ You have one whole week (including the weekend) to hand your solution back in bu
 - Documentation of your design decisions and technical choices for the tasks. A simple markdown or text file (included in your submission) showing the following will be enough: 
    - **Assumption/Decision Made**
    - **Reason**
+
+For separation of concerns and applying SOLID, a Domain layer is created which contains the Models and DTO (Data Transfer Objects).
+Plus The below components show in the diagram.
   ![alt General Layout](https://i.ibb.co/PMK9QK1/General-Layout.png)
    
 # Your colleagues
@@ -88,21 +91,28 @@ As a part of this story we need to provide the administrators/back office staff 
 
 1. Clone the solution locally.
 2. Run the all unit tests inside the Insurance.Tests project; it should run successfully.
+P.S: You will see that a logs folder is created inside the test project
+![alt](https://i.ibb.co/jbRGbjn/logs-Tests.png)
+
 3. Run the Insurance.API project; you will see a Swagger UI which lists 3 endpoints
 ![alt Swagger](https://i.ibb.co/wdx3mQS/Swagger-Integration.png)
 
-4. Make API call through Postman for Product Insurance API similar to:
+4. Logs folder exists inside the src folder.
+![alt Logs](https://i.ibb.co/d6nmwbP/logs-folder.png)
+
+5. Make API call through Postman for Product Insurance API similar to:
 ![alt ProductInsuranceAPI](https://i.ibb.co/8zwBvZy/Product-API.png)
 
-5. Make API call through Postman for Order Insurance API similar to:
+6. Make API call through Postman for Order Insurance API similar to:
 ![alt OrderAPI](https://i.ibb.co/TYxLxvD/OrderAPI.png)
 
-6. Make API call through Postman for Assigning Surcharge rates to a product type, API similar to:
+7. Make API call through Postman for Assigning Surcharge rates to a product type, API similar to:
 Assumptions:
 - Surcharge rate is a percentage from the sales price of the product and it's added on the total insurance value
 - If a product is not insured then no surcharge rate will be applied; since the surcharge rate should be added to the insurance value
 
 ![alt SurchargeRateAPI](https://i.ibb.co/Yprjr6C/Surcharge-Rate.png)
 
-7. Make API call to Order insurance or Product isnurance to see the the applied surchage rate to your product type
+8. Make API call to Order insurance or Product isnurance to see the the applied surchage rate to your product type
 
+9. 
